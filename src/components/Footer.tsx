@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Github, Linkedin, Mail, Heart, ArrowUp } from 'lucide-react';
+import { Github, Linkedin, Mail, Heart, ArrowUp, Code } from 'lucide-react';
 import { usePortfolioContent } from '@/hooks/usePortfolioData';
 import { getPortfolioValue } from '@/utils/portfolioHelpers';
 
