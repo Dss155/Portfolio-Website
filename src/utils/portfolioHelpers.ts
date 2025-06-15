@@ -4,7 +4,7 @@ export const getPortfolioValue = (data: any[], section: string, field: string, d
   return item?.value || defaultValue;
 };
 
-export const groupSkillsByCategory = (skills: any[]) => {
+export const groupSkillsByCategory = (skills: any[]): Record<string, any[]> => {
   return skills?.reduce((acc, skill) => {
     if (!acc[skill.category]) {
       acc[skill.category] = [];

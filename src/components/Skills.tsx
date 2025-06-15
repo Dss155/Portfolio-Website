@@ -38,7 +38,7 @@ const Skills = () => {
                 {category}
               </h3>
               <div className="space-y-4">
-                {categorySkills.map((skill, skillIndex) => (
+                {(categorySkills as any[]).map((skill: any, skillIndex: number) => (
                   <div key={skillIndex} className="space-y-2">
                     <div className="flex justify-between items-center">
                       <span className="text-gray-300 font-medium">{skill.name}</span>
