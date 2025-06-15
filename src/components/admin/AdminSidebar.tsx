@@ -28,23 +28,23 @@ const AdminSidebar = ({
   ];
 
   return (
-    <div className="w-64 bg-white min-h-screen border-r border-gray-200 shadow-lg">
-      <div className="p-6">
-        <div className="flex items-center justify-between mb-8">
+    <div className="w-full lg:w-64 bg-white min-h-screen border-r border-gray-200 shadow-lg">
+      <div className="p-4 lg:p-6">
+        <div className="flex items-center justify-between mb-6 lg:mb-8">
           <div className="flex items-center space-x-2">
             <Settings className="text-blue-600" size={24} />
-            <h1 className="text-xl font-bold text-gray-800">Admin Panel</h1>
+            <h1 className="text-xl font-bold text-gray-900">Admin Panel</h1>
           </div>
           <button
             onClick={logout}
-            className="text-gray-500 hover:text-red-600 transition-colors"
+            className="text-gray-500 hover:text-red-600 transition-colors p-2 rounded-lg hover:bg-red-50"
             title="Logout"
           >
             <LogOut size={20} />
           </button>
         </div>
         
-        <nav className="space-y-2">
+        <nav className="space-y-1">
           {menuItems.map((item) => (
             <button
               key={item.id}
@@ -53,14 +53,14 @@ const AdminSidebar = ({
                 setEditingItem(null);
                 setShowAddForm(false);
               }}
-              className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors duration-200 ${
+              className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 text-left ${
                 activeSection === item.id
-                  ? 'bg-blue-100 text-blue-700 border border-blue-200'
-                  : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
+                  ? 'bg-blue-100 text-blue-700 border border-blue-200 font-medium'
+                  : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
               }`}
             >
               <item.icon size={20} />
-              <span>{item.label}</span>
+              <span className="text-sm lg:text-base">{item.label}</span>
             </button>
           ))}
         </nav>

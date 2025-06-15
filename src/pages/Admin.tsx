@@ -62,23 +62,25 @@ const Admin = () => {
 
   const handleSave = async (data: any) => {
     try {
+      console.log('Saving data:', data, 'for section:', activeSection);
+      
       if (activeSection === 'content') {
         await updateContent.mutateAsync(data);
       } else if (activeSection === 'skills') {
-        if (editingItem) {
-          await updateSkill.mutateAsync({ id: editingItem.id, ...data });
+        if (data.id) {
+          await updateSkill.mutateAsync(data);
         } else {
           await createSkill.mutateAsync(data);
         }
       } else if (activeSection === 'projects') {
-        if (editingItem) {
-          await updateProject.mutateAsync({ id: editingItem.id, ...data });
+        if (data.id) {
+          await updateProject.mutateAsync(data);
         } else {
           await createProject.mutateAsync(data);
         }
       } else if (activeSection === 'experience') {
-        if (editingItem) {
-          await updateExperience.mutateAsync({ id: editingItem.id, ...data });
+        if (data.id) {
+          await updateExperience.mutateAsync(data);
         } else {
           await createExperience.mutateAsync(data);
         }
@@ -91,7 +93,7 @@ const Admin = () => {
       toast.success('Changes saved successfully!');
     } catch (error) {
       toast.error('Failed to save changes');
-      console.error(error);
+      console.error('Save error:', error);
     }
   };
 
@@ -107,13 +109,13 @@ const Admin = () => {
       toast.success('Item deleted successfully!');
     } catch (error) {
       toast.error('Failed to delete item');
-      console.error(error);
+      console.error('Delete error:', error);
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
-      <div className="flex">
+      <div className="flex flex-col lg:flex-row">
         <AdminSidebar
           activeSection={activeSection}
           setActiveSection={setActiveSection}
@@ -123,16 +125,16 @@ const Admin = () => {
         />
 
         {/* Main Content */}
-        <div className="flex-1 p-8">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl font-bold text-gray-800">
+        <div className="flex-1 p-4 lg:p-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 lg:mb-8 gap-4">
+              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900">
                 {menuItems.find(item => item.id === activeSection)?.label}
               </h2>
               {['skills', 'projects', 'experience'].includes(activeSection) && (
                 <button
                   onClick={() => setShowAddForm(true)}
-                  className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                  className="flex items-center justify-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium"
                 >
                   <Plus size={20} />
                   <span>Add New</span>

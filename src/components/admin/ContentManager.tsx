@@ -24,7 +24,7 @@ const ContentManager = ({ data, onSave, editingItem, setEditingItem }: ContentMa
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {contentItems.map((item, index) => (
         <ContentItem
           key={index}
@@ -48,8 +48,13 @@ const ContentItem = ({ item, value, onSave, editingItem, setEditingItem }: any) 
     setEditValue(value);
   };
 
-  const handleSave = () => {
-    onSave({ section: item.section, field: item.field, value: editValue });
+  const handleSave = async () => {
+    try {
+      await onSave({ section: item.section, field: item.field, value: editValue });
+      setEditingItem(null);
+    } catch (error) {
+      console.error('Error saving content:', error);
+    }
   };
 
   const handleCancel = () => {
@@ -58,13 +63,13 @@ const ContentItem = ({ item, value, onSave, editingItem, setEditingItem }: any) 
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-gray-800">{item.label}</h3>
+    <div className="bg-white p-4 md:p-6 rounded-xl border border-blue-200 shadow-sm hover:shadow-md transition-shadow">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-2">
+        <h3 className="text-lg font-semibold text-gray-900">{item.label}</h3>
         {!isEditing && (
           <button
             onClick={handleEdit}
-            className="flex items-center space-x-1 text-blue-600 hover:text-blue-700"
+            className="flex items-center space-x-1 text-blue-600 hover:text-blue-700 text-sm font-medium px-3 py-1 rounded-lg hover:bg-blue-50 transition-colors"
           >
             <Edit size={16} />
             <span>Edit</span>
@@ -79,27 +84,29 @@ const ContentItem = ({ item, value, onSave, editingItem, setEditingItem }: any) 
               value={editValue}
               onChange={(e) => setEditValue(e.target.value)}
               rows={4}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none text-base"
+              placeholder={`Enter ${item.label.toLowerCase()}`}
             />
           ) : (
             <input
               type="text"
               value={editValue}
               onChange={(e) => setEditValue(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-800 placeholder-gray-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none text-base"
+              placeholder={`Enter ${item.label.toLowerCase()}`}
             />
           )}
-          <div className="flex space-x-3">
+          <div className="flex flex-col sm:flex-row gap-3">
             <button
               onClick={handleSave}
-              className="flex items-center space-x-1 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
+              className="flex items-center justify-center space-x-1 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors font-medium"
             >
               <Save size={16} />
               <span>Save</span>
             </button>
             <button
               onClick={handleCancel}
-              className="flex items-center space-x-1 bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+              className="flex items-center justify-center space-x-1 bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors font-medium"
             >
               <X size={16} />
               <span>Cancel</span>
@@ -107,7 +114,7 @@ const ContentItem = ({ item, value, onSave, editingItem, setEditingItem }: any) 
           </div>
         </div>
       ) : (
-        <p className="text-gray-600">{value || 'No content set'}</p>
+        <p className="text-gray-700 text-base leading-relaxed">{value || 'No content set'}</p>
       )}
     </div>
   );
