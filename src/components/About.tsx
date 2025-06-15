@@ -1,8 +1,25 @@
 
 import React from 'react';
 import { GraduationCap, Code, Award, Users } from 'lucide-react';
+import { usePortfolioContent } from '@/hooks/usePortfolioData';
+import { getPortfolioValue } from '@/utils/portfolioHelpers';
 
 const About = () => {
+  const { data: portfolioContent, isLoading } = usePortfolioContent();
+
+  if (isLoading) {
+    return (
+      <section id="about" className="py-20 bg-slate-800/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-cyan-400 mx-auto"></div>
+        </div>
+      </section>
+    );
+  }
+
+  const journeyTitle = getPortfolioValue(portfolioContent, 'about', 'journey_title', 'My Journey');
+  const journeyDescription = getPortfolioValue(portfolioContent, 'about', 'journey_description', 'Currently pursuing Master of Computer Applications (MCA), I am passionate about full-stack development and emerging technologies.');
+
   const stats = [
     { icon: GraduationCap, label: 'Education', value: 'MCA Student' },
     { icon: Code, label: 'Projects', value: '15+' },
@@ -23,11 +40,9 @@ const About = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <div className="bg-gradient-to-r from-cyan-500/10 to-blue-500/10 p-6 rounded-xl border border-cyan-500/20">
-              <h3 className="text-2xl font-semibold text-white mb-4">My Journey</h3>
+              <h3 className="text-2xl font-semibold text-white mb-4">{journeyTitle}</h3>
               <p className="text-gray-300 leading-relaxed mb-4">
-                Currently pursuing Master of Computer Applications (MCA), I am passionate about 
-                full-stack development and emerging technologies. My academic journey has equipped 
-                me with strong problem-solving skills and a deep understanding of software engineering principles.
+                {journeyDescription}
               </p>
               <p className="text-gray-300 leading-relaxed">
                 I specialize in building scalable web applications using modern frameworks and 

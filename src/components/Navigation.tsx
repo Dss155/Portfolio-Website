@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Settings } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,6 +47,13 @@ const Navigation = () => {
                   {item.label}
                 </a>
               ))}
+              <Link
+                to="/admin"
+                className="flex items-center space-x-1 text-gray-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              >
+                <Settings size={16} />
+                <span>Admin</span>
+              </Link>
             </div>
           </div>
           
@@ -73,6 +81,14 @@ const Navigation = () => {
                 {item.label}
               </a>
             ))}
+            <Link
+              to="/admin"
+              className="flex items-center space-x-1 text-gray-300 hover:text-cyan-400 px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
+              onClick={() => setIsOpen(false)}
+            >
+              <Settings size={16} />
+              <span>Admin Panel</span>
+            </Link>
           </div>
         </div>
       )}

@@ -1,39 +1,22 @@
 
 import React from 'react';
+import { useSkills } from '@/hooks/usePortfolioData';
+import { groupSkillsByCategory } from '@/utils/portfolioHelpers';
 
 const Skills = () => {
-  const skillCategories = [
-    {
-      title: 'Frontend Development',
-      skills: [
-        { name: 'React', level: 90 },
-        { name: 'JavaScript', level: 85 },
-        { name: 'TypeScript', level: 80 },
-        { name: 'HTML/CSS', level: 95 },
-        { name: 'Tailwind CSS', level: 88 },
-      ],
-    },
-    {
-      title: 'Backend Development',
-      skills: [
-        { name: 'Node.js', level: 85 },
-        { name: 'Python', level: 80 },
-        { name: 'Java', level: 75 },
-        { name: 'PHP', level: 70 },
-        { name: 'Express.js', level: 82 },
-      ],
-    },
-    {
-      title: 'Database & Tools',
-      skills: [
-        { name: 'MongoDB', level: 85 },
-        { name: 'MySQL', level: 88 },
-        { name: 'Git/GitHub', level: 90 },
-        { name: 'Docker', level: 75 },
-        { name: 'AWS', level: 70 },
-      ],
-    },
-  ];
+  const { data: skills, isLoading } = useSkills();
+
+  if (isLoading) {
+    return (
+      <section id="skills" className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-cyan-400 mx-auto"></div>
+        </div>
+      </section>
+    );
+  }
+
+  const skillCategories = groupSkillsByCategory(skills || []);
 
   return (
     <section id="skills" className="py-20">
@@ -46,16 +29,16 @@ const Skills = () => {
         </div>
         
         <div className="grid md:grid-cols-3 gap-8">
-          {skillCategories.map((category, index) => (
+          {Object.entries(skillCategories).map(([category, categorySkills], index) => (
             <div
               key={index}
               className="bg-slate-800/50 p-6 rounded-xl border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300"
             >
               <h3 className="text-xl font-semibold text-white mb-6 text-center">
-                {category.title}
+                {category}
               </h3>
               <div className="space-y-4">
-                {category.skills.map((skill, skillIndex) => (
+                {categorySkills.map((skill, skillIndex) => (
                   <div key={skillIndex} className="space-y-2">
                     <div className="flex justify-between items-center">
                       <span className="text-gray-300 font-medium">{skill.name}</span>

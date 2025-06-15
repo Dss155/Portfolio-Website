@@ -1,9 +1,12 @@
 
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { toast } from 'sonner';
+import { useContactInfo } from '@/hooks/usePortfolioData';
+import { getContactByType } from '@/utils/portfolioHelpers';
 
 const Contact = () => {
+  const { data: contactInfo, isLoading } = useContactInfo();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -31,24 +34,38 @@ const Contact = () => {
     }, 2000);
   };
 
-  const contactInfo = [
+  if (isLoading) {
+    return (
+      <section id="contact" className="py-20 bg-slate-800/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-cyan-400 mx-auto"></div>
+        </div>
+      </section>
+    );
+  }
+
+  const emailContact = getContactByType(contactInfo, 'email');
+  const phoneContact = getContactByType(contactInfo, 'phone');
+  const locationContact = getContactByType(contactInfo, 'location');
+
+  const contactInfoList = [
     {
       icon: Mail,
       label: 'Email',
-      value: 'your.email@example.com',
-      href: 'mailto:your.email@example.com',
+      value: emailContact?.display_text || 'your.email@example.com',
+      href: emailContact?.href || 'mailto:your.email@example.com',
     },
     {
       icon: Phone,
       label: 'Phone',
-      value: '+91 98765 43210',
-      href: 'tel:+919876543210',
+      value: phoneContact?.display_text || '+91 98765 43210',
+      href: phoneContact?.href || 'tel:+919876543210',
     },
     {
       icon: MapPin,
       label: 'Location',
-      value: 'Your City, State',
-      href: '#',
+      value: locationContact?.display_text || 'Your City, State',
+      href: locationContact?.href || '#',
     },
   ];
 
@@ -67,7 +84,7 @@ const Contact = () => {
             <div>
               <h3 className="text-2xl font-semibold text-white mb-6">Contact Information</h3>
               <div className="space-y-4">
-                {contactInfo.map((info, index) => (
+                {contactInfoList.map((info, index) => (
                   <a
                     key={index}
                     href={info.href}

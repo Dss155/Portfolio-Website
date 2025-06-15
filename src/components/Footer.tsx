@@ -1,9 +1,15 @@
 
 import React from 'react';
 import { Github, Linkedin, Mail, Heart } from 'lucide-react';
+import { usePortfolioContent } from '@/hooks/usePortfolioData';
+import { getPortfolioValue } from '@/utils/portfolioHelpers';
 
 const Footer = () => {
+  const { data: portfolioContent } = usePortfolioContent();
   const currentYear = new Date().getFullYear();
+  
+  const footerDescription = getPortfolioValue(portfolioContent, 'footer', 'description', 'MCA Student passionate about creating innovative solutions and building scalable applications with modern technologies.');
+  const name = getPortfolioValue(portfolioContent, 'hero', 'name', 'Your Name');
 
   return (
     <footer className="bg-slate-900 border-t border-slate-800">
@@ -14,8 +20,7 @@ const Footer = () => {
               Portfolio
             </h3>
             <p className="text-gray-400 leading-relaxed">
-              MCA Student passionate about creating innovative solutions and building 
-              scalable applications with modern technologies.
+              {footerDescription}
             </p>
           </div>
           
@@ -49,7 +54,7 @@ const Footer = () => {
           <p className="text-gray-400 flex items-center justify-center space-x-1">
             <span>© {currentYear} Made with</span>
             <Heart size={16} className="text-red-500" />
-            <span>by Your Name</span>
+            <span>by {name}</span>
           </p>
         </div>
       </div>

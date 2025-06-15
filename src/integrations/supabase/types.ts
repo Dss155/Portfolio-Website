@@ -9,7 +9,159 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      contact_info: {
+        Row: {
+          created_at: string
+          display_text: string | null
+          href: string | null
+          id: string
+          type: string
+          value: string
+        }
+        Insert: {
+          created_at?: string
+          display_text?: string | null
+          href?: string | null
+          id?: string
+          type: string
+          value: string
+        }
+        Update: {
+          created_at?: string
+          display_text?: string | null
+          href?: string | null
+          id?: string
+          type?: string
+          value?: string
+        }
+        Relationships: []
+      }
+      experience: {
+        Row: {
+          company: string
+          created_at: string
+          description: string[] | null
+          duration: string
+          id: string
+          location: string | null
+          position: string
+          updated_at: string
+        }
+        Insert: {
+          company: string
+          created_at?: string
+          description?: string[] | null
+          duration: string
+          id?: string
+          location?: string | null
+          position: string
+          updated_at?: string
+        }
+        Update: {
+          company?: string
+          created_at?: string
+          description?: string[] | null
+          duration?: string
+          id?: string
+          location?: string | null
+          position?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      portfolio_content: {
+        Row: {
+          created_at: string
+          field: string
+          id: string
+          section: string
+          updated_at: string
+          value: string | null
+        }
+        Insert: {
+          created_at?: string
+          field: string
+          id?: string
+          section: string
+          updated_at?: string
+          value?: string | null
+        }
+        Update: {
+          created_at?: string
+          field?: string
+          id?: string
+          section?: string
+          updated_at?: string
+          value?: string | null
+        }
+        Relationships: []
+      }
+      projects: {
+        Row: {
+          created_at: string
+          description: string | null
+          featured: boolean | null
+          github_url: string | null
+          id: string
+          image_url: string | null
+          live_url: string | null
+          technologies: string[] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          featured?: boolean | null
+          github_url?: string | null
+          id?: string
+          image_url?: string | null
+          live_url?: string | null
+          technologies?: string[] | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          featured?: boolean | null
+          github_url?: string | null
+          id?: string
+          image_url?: string | null
+          live_url?: string | null
+          technologies?: string[] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      skills: {
+        Row: {
+          category: string
+          created_at: string
+          id: string
+          level: number
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          id?: string
+          level: number
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          id?: string
+          level?: number
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

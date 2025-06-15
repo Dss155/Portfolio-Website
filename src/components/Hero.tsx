@@ -1,8 +1,24 @@
 
 import React from 'react';
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { usePortfolioContent } from '@/hooks/usePortfolioData';
+import { getPortfolioValue } from '@/utils/portfolioHelpers';
 
 const Hero = () => {
+  const { data: portfolioContent, isLoading } = usePortfolioContent();
+
+  if (isLoading) {
+    return (
+      <section id="home" className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-cyan-400"></div>
+      </section>
+    );
+  }
+
+  const name = getPortfolioValue(portfolioContent, 'hero', 'name', 'Your Name');
+  const title = getPortfolioValue(portfolioContent, 'hero', 'title', 'MCA Student & Full Stack Developer');
+  const description = getPortfolioValue(portfolioContent, 'hero', 'description', 'Passionate about creating innovative solutions and building scalable applications with modern technologies.');
+
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-blue-500/10 to-purple-500/10"></div>
@@ -13,15 +29,14 @@ const Hero = () => {
             <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
               Hi, I'm{' '}
               <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
-                Your Name
+                {name}
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
-              MCA Student & Full Stack Developer
+              {title}
             </p>
             <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-              Passionate about creating innovative solutions and building scalable applications
-              with modern technologies.
+              {description}
             </p>
           </div>
           
