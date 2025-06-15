@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowDown, Github, Linkedin, Mail, Download } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Mail, Download, Code, Terminal } from 'lucide-react';
 import { usePortfolioContent } from '@/hooks/usePortfolioData';
 import { getPortfolioValue } from '@/utils/portfolioHelpers';
 
@@ -9,80 +9,87 @@ const Hero = () => {
 
   if (isLoading) {
     return (
-      <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-100 to-amber-100">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-4 border-orange-500"></div>
+      <section id="home" className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </section>
     );
   }
 
   const name = getPortfolioValue(portfolioContent, 'hero', 'name', 'Your Name');
-  const title = getPortfolioValue(portfolioContent, 'hero', 'title', 'MCA Student & Full Stack Developer');
-  const description = getPortfolioValue(portfolioContent, 'hero', 'description', 'Passionate about creating innovative solutions and building scalable applications with modern technologies.');
+  const title = getPortfolioValue(portfolioContent, 'hero', 'title', 'Full Stack Developer');
+  const description = getPortfolioValue(portfolioContent, 'hero', 'description', 'Building scalable applications with modern technologies and clean code practices.');
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-orange-100 via-amber-100 to-yellow-100">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-orange-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-        <div className="absolute top-40 right-20 w-72 h-72 bg-amber-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-8 left-40 w-72 h-72 bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-      </div>
+    <section id="home" className="min-h-screen flex items-center justify-center relative bg-slate-50">
+      {/* Professional grid background */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-60"></div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <div className="space-y-8 animate-fade-in">
+          {/* Developer badge */}
+          <div className="inline-flex items-center space-x-2 bg-blue-50 border border-blue-200 rounded-full px-4 py-2 text-sm font-medium text-blue-700">
+            <Terminal size={16} />
+            <span>Full Stack Developer</span>
+          </div>
+
           <div className="space-y-6">
-            <h1 className="text-5xl md:text-7xl font-bold text-gray-800 leading-tight">
+            <h1 className="text-4xl md:text-6xl font-bold text-slate-900 leading-tight">
               Hi, I'm{' '}
-              <span className="bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
+              <span className="gradient-text">
                 {name}
               </span>
             </h1>
-            <p className="text-2xl md:text-3xl text-gray-700 max-w-4xl mx-auto font-medium">
+            <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto font-medium">
               {title}
             </p>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
               {description}
             </p>
           </div>
           
-          <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 pt-6">
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 pt-6">
             <a
               href="#contact"
-              className="bg-gradient-to-r from-orange-500 to-amber-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-orange-600 hover:to-amber-700 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
+              className="btn-primary inline-flex items-center space-x-2"
             >
-              Get In Touch
+              <Mail size={18} />
+              <span>Get In Touch</span>
             </a>
             <a
               href="#projects"
-              className="border-2 border-orange-500 text-orange-600 px-8 py-4 rounded-xl font-semibold hover:bg-orange-500 hover:text-white transition-all duration-300 transform hover:scale-105 shadow-lg"
+              className="btn-secondary inline-flex items-center space-x-2"
             >
-              View Projects
+              <Code size={18} />
+              <span>View Projects</span>
             </a>
             <a
               href="#"
-              className="bg-gray-800 text-white px-8 py-4 rounded-xl font-semibold hover:bg-gray-900 transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center space-x-2"
+              className="bg-slate-800 text-white px-6 py-3 rounded-lg font-medium hover:bg-slate-900 transition-all duration-200 shadow-professional hover:shadow-professional-lg transform hover:scale-[1.02] inline-flex items-center space-x-2"
             >
-              <Download size={20} />
-              <span>Download CV</span>
+              <Download size={18} />
+              <span>Resume</span>
             </a>
           </div>
           
-          <div className="flex justify-center space-x-8 pt-8">
-            <a href="#" className="text-gray-600 hover:text-orange-600 transition-colors duration-300 transform hover:scale-110">
-              <Github size={28} />
+          {/* Social Links */}
+          <div className="flex justify-center space-x-6 pt-8">
+            <a href="#" className="text-slate-500 hover:text-blue-600 transition-colors duration-200 transform hover:scale-110">
+              <Github size={24} />
             </a>
-            <a href="#" className="text-gray-600 hover:text-orange-600 transition-colors duration-300 transform hover:scale-110">
-              <Linkedin size={28} />
+            <a href="#" className="text-slate-500 hover:text-blue-600 transition-colors duration-200 transform hover:scale-110">
+              <Linkedin size={24} />
             </a>
-            <a href="#" className="text-gray-600 hover:text-orange-600 transition-colors duration-300 transform hover:scale-110">
-              <Mail size={28} />
+            <a href="#" className="text-slate-500 hover:text-blue-600 transition-colors duration-200 transform hover:scale-110">
+              <Mail size={24} />
             </a>
           </div>
         </div>
       </div>
       
+      {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <ArrowDown className="text-gray-600" size={24} />
+        <ArrowDown className="text-slate-400" size={20} />
       </div>
     </section>
   );

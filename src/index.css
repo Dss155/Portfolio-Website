@@ -3,8 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import Google Fonts for better typography */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+/* Import Google Fonts for professional typography */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
@@ -85,11 +85,15 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-poppins font-semibold;
+    @apply font-inter font-semibold;
   }
 
   p, span, div {
-    @apply text-gray-700 leading-relaxed;
+    @apply text-slate-700 leading-relaxed;
+  }
+
+  code {
+    @apply font-mono;
   }
 }
 
@@ -98,16 +102,8 @@
     animation: fadeIn 1s ease-out;
   }
 
-  .animate-blob {
-    animation: blob 7s infinite;
-  }
-
-  .animation-delay-2000 {
-    animation-delay: 2s;
-  }
-
-  .animation-delay-4000 {
-    animation-delay: 4s;
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out;
   }
 
   @keyframes fadeIn {
@@ -121,63 +117,63 @@
     }
   }
 
-  @keyframes blob {
-    0% {
-      transform: translate(0px, 0px) scale(1);
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
     }
-    33% {
-      transform: translate(30px, -50px) scale(1.1);
-    }
-    66% {
-      transform: translate(-20px, 20px) scale(0.9);
-    }
-    100% {
-      transform: translate(0px, 0px) scale(1);
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-orange-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent;
   }
 
   .glass-effect {
     @apply bg-white/10 backdrop-blur-md border border-white/20;
   }
 
-  .shadow-glow {
-    box-shadow: 0 0 30px rgba(249, 115, 22, 0.15);
+  .shadow-professional {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .shadow-professional-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   }
 
   .font-inter {
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   }
 
-  .font-poppins {
-    font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  .font-mono {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
   }
 
-  /* High contrast text for better readability */
-  .text-high-contrast {
-    @apply text-gray-900;
-    font-weight: 600;
-  }
-
-  .text-medium-contrast {
-    @apply text-gray-800;
-    font-weight: 500;
-  }
-
-  .text-low-contrast {
-    @apply text-gray-700;
-    font-weight: 400;
-  }
-
-  /* Modern button styles */
+  /* Professional button styles */
   .btn-primary {
-    @apply bg-gradient-to-r from-orange-500 to-amber-600 text-white font-semibold px-8 py-4 rounded-xl hover:from-orange-600 hover:to-amber-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105;
+    @apply bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium px-6 py-3 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-professional hover:shadow-professional-lg transform hover:scale-[1.02];
   }
 
   .btn-secondary {
-    @apply bg-white text-gray-800 border-2 border-orange-500 font-semibold px-8 py-4 rounded-xl hover:bg-orange-500 hover:text-white transition-all duration-200 shadow-lg hover:shadow-xl;
+    @apply bg-white text-slate-700 border border-slate-300 font-medium px-6 py-3 rounded-lg hover:bg-slate-50 hover:border-slate-400 transition-all duration-200 shadow-professional hover:shadow-professional-lg;
+  }
+
+  .card-professional {
+    @apply bg-white border border-slate-200 rounded-xl shadow-professional hover:shadow-professional-lg transition-all duration-300;
+  }
+
+  .text-professional {
+    @apply text-slate-700 font-medium;
+  }
+
+  .text-professional-heading {
+    @apply text-slate-900 font-semibold;
+  }
+
+  .text-professional-muted {
+    @apply text-slate-500;
   }
 }

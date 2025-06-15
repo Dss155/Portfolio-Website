@@ -42,8 +42,8 @@ const Admin = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-purple-400"></div>
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
       </div>
     );
   }
@@ -110,7 +110,7 @@ const Admin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900">
+    <div className="min-h-screen bg-slate-900">
       <div className="flex flex-col lg:flex-row min-h-screen">
         <AdminSidebar
           activeSection={activeSection}
@@ -121,80 +121,82 @@ const Admin = () => {
         />
 
         {/* Main Content */}
-        <div className="flex-1 p-4 lg:p-8 overflow-auto">
+        <div className="flex-1 p-4 lg:p-8 overflow-auto bg-slate-50">
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 lg:mb-10 gap-4">
               <div>
-                <h2 className="text-3xl lg:text-4xl font-bold text-white mb-2">
+                <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-2">
                   {menuItems.find(item => item.id === activeSection)?.label}
                 </h2>
-                <p className="text-purple-300">Manage your portfolio content efficiently</p>
+                <p className="text-slate-600">Manage your portfolio content efficiently</p>
               </div>
               {['skills', 'projects', 'experience'].includes(activeSection) && (
                 <button
                   onClick={() => setShowAddForm(true)}
-                  className="flex items-center justify-center space-x-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-3 rounded-xl hover:from-purple-700 hover:to-indigo-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
+                  className="flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 font-medium shadow-professional hover:shadow-professional-lg transform hover:scale-[1.02]"
                 >
-                  <Plus size={22} />
+                  <Plus size={20} />
                   <span>Add New</span>
                 </button>
               )}
             </div>
 
             {/* Render appropriate manager based on active section */}
-            {activeSection === 'content' && (
-              <ContentManager 
-                data={portfolioContent} 
-                onSave={handleSave}
-                editingItem={editingItem}
-                setEditingItem={setEditingItem}
-              />
-            )}
+            <div className="space-y-6">
+              {activeSection === 'content' && (
+                <ContentManager 
+                  data={portfolioContent} 
+                  onSave={handleSave}
+                  editingItem={editingItem}
+                  setEditingItem={setEditingItem}
+                />
+              )}
 
-            {activeSection === 'skills' && (
-              <SkillsManager 
-                data={skills} 
-                onSave={handleSave}
-                onDelete={handleDelete}
-                editingItem={editingItem}
-                setEditingItem={setEditingItem}
-                showAddForm={showAddForm}
-                setShowAddForm={setShowAddForm}
-              />
-            )}
+              {activeSection === 'skills' && (
+                <SkillsManager 
+                  data={skills} 
+                  onSave={handleSave}
+                  onDelete={handleDelete}
+                  editingItem={editingItem}
+                  setEditingItem={setEditingItem}
+                  showAddForm={showAddForm}
+                  setShowAddForm={setShowAddForm}
+                />
+              )}
 
-            {activeSection === 'projects' && (
-              <ProjectsManager 
-                data={projects} 
-                onSave={handleSave}
-                onDelete={handleDelete}
-                editingItem={editingItem}
-                setEditingItem={setEditingItem}
-                showAddForm={showAddForm}
-                setShowAddForm={setShowAddForm}
-              />
-            )}
+              {activeSection === 'projects' && (
+                <ProjectsManager 
+                  data={projects} 
+                  onSave={handleSave}
+                  onDelete={handleDelete}
+                  editingItem={editingItem}
+                  setEditingItem={setEditingItem}
+                  showAddForm={showAddForm}
+                  setShowAddForm={setShowAddForm}
+                />
+              )}
 
-            {activeSection === 'experience' && (
-              <ExperienceManager 
-                data={experience} 
-                onSave={handleSave}
-                onDelete={handleDelete}
-                editingItem={editingItem}
-                setEditingItem={setEditingItem}
-                showAddForm={showAddForm}
-                setShowAddForm={setShowAddForm}
-              />
-            )}
+              {activeSection === 'experience' && (
+                <ExperienceManager 
+                  data={experience} 
+                  onSave={handleSave}
+                  onDelete={handleDelete}
+                  editingItem={editingItem}
+                  setEditingItem={setEditingItem}
+                  showAddForm={showAddForm}
+                  setShowAddForm={setShowAddForm}
+                />
+              )}
 
-            {activeSection === 'contact' && (
-              <ContactManager 
-                data={contactInfo} 
-                onSave={handleSave}
-                editingItem={editingItem}
-                setEditingItem={setEditingItem}
-              />
-            )}
+              {activeSection === 'contact' && (
+                <ContactManager 
+                  data={contactInfo} 
+                  onSave={handleSave}
+                  editingItem={editingItem}
+                  setEditingItem={setEditingItem}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>
