@@ -42,8 +42,8 @@ const Admin = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-purple-400"></div>
       </div>
     );
   }
@@ -54,10 +54,10 @@ const Admin = () => {
 
   const menuItems = [
     { id: 'content', label: 'Portfolio Content' },
-    { id: 'skills', label: 'Skills' },
+    { id: 'skills', label: 'Skills Management' },
     { id: 'projects', label: 'Projects' },
     { id: 'experience', label: 'Experience' },
-    { id: 'contact', label: 'Contact Info' },
+    { id: 'contact', label: 'Contact Information' },
   ];
 
   const handleSave = async (data: any) => {
@@ -90,9 +90,7 @@ const Admin = () => {
       
       setEditingItem(null);
       setShowAddForm(false);
-      toast.success('Changes saved successfully!');
     } catch (error) {
-      toast.error('Failed to save changes');
       console.error('Save error:', error);
     }
   };
@@ -106,16 +104,14 @@ const Admin = () => {
       } else if (activeSection === 'experience') {
         await deleteExperience.mutateAsync(id);
       }
-      toast.success('Item deleted successfully!');
     } catch (error) {
-      toast.error('Failed to delete item');
       console.error('Delete error:', error);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
-      <div className="flex flex-col lg:flex-row">
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900">
+      <div className="flex flex-col lg:flex-row min-h-screen">
         <AdminSidebar
           activeSection={activeSection}
           setActiveSection={setActiveSection}
@@ -125,18 +121,21 @@ const Admin = () => {
         />
 
         {/* Main Content */}
-        <div className="flex-1 p-4 lg:p-8">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 lg:mb-8 gap-4">
-              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900">
-                {menuItems.find(item => item.id === activeSection)?.label}
-              </h2>
+        <div className="flex-1 p-4 lg:p-8 overflow-auto">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 lg:mb-10 gap-4">
+              <div>
+                <h2 className="text-3xl lg:text-4xl font-bold text-white mb-2">
+                  {menuItems.find(item => item.id === activeSection)?.label}
+                </h2>
+                <p className="text-purple-300">Manage your portfolio content efficiently</p>
+              </div>
               {['skills', 'projects', 'experience'].includes(activeSection) && (
                 <button
                   onClick={() => setShowAddForm(true)}
-                  className="flex items-center justify-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium"
+                  className="flex items-center justify-center space-x-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-3 rounded-xl hover:from-purple-700 hover:to-indigo-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
-                  <Plus size={20} />
+                  <Plus size={22} />
                   <span>Add New</span>
                 </button>
               )}
